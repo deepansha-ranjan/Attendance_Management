@@ -2,21 +2,31 @@
 .attendance-app {
   text-align: center;
   padding: 20px;
-  background: linear-gradient(135deg, #f0f0f0, #d3e0ff); /* Light gradient */
+  /* background: linear-gradient(135deg, #FFB6C1, #FF69B4); Light Pink to Hot Pink */
+  /* Other options:
+  background: linear-gradient(135deg, #B3E5FC, #03A9F4); /* Light Blue to Bright Blue */
+  background: linear-gradient(135deg, #FFF9C4, #FFB300); /* Light Yellow to Deep Yellow */
+  /* background: linear-gradient(135deg, #B2FF59, #76FF03); Light Green to Lime Green */
+
   color: #000;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Dark Mode Styles with Gradient */
 .attendance-app.dark {
-  background: linear-gradient(135deg, #1e1e1e, #333); /* Dark gradient */
+  /* background: linear-gradient(135deg, #1A237E, #3F51B5); */
+  
+  background: linear-gradient(135deg, hsl(0, 0%, 0%), hsl(264, 6%, 31%)); 
+  /* background: linear-gradient(135deg, #0D47A1, #1976D2); */
+  /* background: linear-gradient(135deg, #004D40, #00796B); */
+
   color: #fff;
 }
 
 header {
   display: flex;
   justify-content: space-between;
-  background-color: #4caf50;
+  align-items: center;
+  background-color: #49924c;
   padding: 10px;
   color: white;
 }
@@ -25,9 +35,10 @@ header {
   background-color: #ff5722;
   color: white;
   border: none;
-  padding: 5px 10px;
+  padding: 10px 15px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  border-radius: 5px;
 }
 
 .theme-toggle {
@@ -35,29 +46,33 @@ header {
   border: none;
   color: inherit;
   cursor: pointer;
-  font-size: 24px; /* Make icons larger */
+  font-size: 24px;
   transition: color 0.3s ease;
 }
 
 .attendance-app.dark .theme-toggle {
-  color: #ffd700; /* Sun color in dark mode */
+  color: #ffd700;
 }
 
 .attendance-app.light .theme-toggle {
-  color: #333; /* Moon color in light mode */
+  color: #333;
 }
 
-.session-selector,
-.class-selector {
+.date-selector,
+.branch-selector,
+.session-selector {
   margin: 20px 0;
 }
 
-.session-selector label {
-  font-weight: bold;
-}
-
+.date-selector input,
+.branch-selector select,
 .session-selector select {
   padding: 5px;
+  margin-left: 10px;
+}
+
+.class-selector {
+  margin: 20px 0;
 }
 
 .class-selector button {
@@ -82,43 +97,93 @@ header {
 }
 
 .attendance-app.dark .student-list {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .student {
   display: flex;
   justify-content: space-between;
-  background-color: #ff7043;
+  align-items: center;
   padding: 10px;
-  margin: 5px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.student-info {
+  display: flex;
+  justify-content: space-between; /* Space between columns */
+  width: 100%; /* Take full width of the student */
+}
+
+.roll-no,
+.name {
+  flex: 1; /* Equal space for roll no and name */
+  margin: 0 10px; /* Adjusted margin */
+}
+
+.attendance-controls {
+  display: flex;
+  align-items: center; /* Aligns items vertically in center */
+  gap: 10px; /* Spacing between buttons and checkbox */
+}
+
+.attendance-checkbox {
+  margin-right: 10px; /* Space before checkbox */
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.add-student-btn,
+.edit-student,
+.remove-student {
+  background-color: #4caf50;
   color: white;
-  border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.student input {
-  transform: scale(1.5);
+.remove-student {
+  background-color: #ff5722;
 }
 
-/* Responsive Design */
+.add-student-btn:hover,
+.edit-student:hover,
+.remove-student:hover {
+  background-color: #00796b;
+}
+
+.remove-student:hover {
+  background-color: #e64a19;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Responsive Styles */
 @media (max-width: 768px) {
-  .student-list {
-    padding: 10px;
-  }
-
-  .student {
+  header {
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
   }
 
   .class-selector button {
-    width: 100%;
-    margin: 5px 0;
+    width: 100%; /* Full width on smaller screens */
   }
-}
 
-@media (min-width: 769px) {
   .student {
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align to start */
+  }
+
+  .student-info {
+    flex-direction: column; /* Stack student info vertically */
+    width: auto; /* Adjust width for smaller screens */
   }
 }
